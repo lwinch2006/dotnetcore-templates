@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Dmitry Kalinin",
+  "classifications": [ "Common", "Console" ],
+  "identity": "ExampleTemplate.AsyncProject",
+  "name": "Example templates: async project",
+  "shortName": "consoleasync",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "dka.netcore.sampleconsole",
+  "preferNameDirectory" : "true",
+  "symbols":{
+    "EnableContactPage": {
+      "type": "parameter",
+      "dataType":"bool",
+      "defaultValue": "false"
+    }
+  },
+  "sources": [
+     {
+        "modifiers": [
+            {
+                "condition": "(!EnableContactPage)",
+                "exclude": [ "appsettings.json" ]
+            }
+        ]
+     }
+  ],
+  "SpecialCustomOperations": {
+    "**/*.csproj": {
+      "operations": [
+        {
+				"type": "conditional",
+				"configuration": {
+					"if": [ "//#if" ],
+					"else": [ "//#else" ],
+					"elseif": [ "//#elseif" ],
+					"endif": [ "//#endif" ],
+					"actionableIf": [ "////#if" ],
+					"actionableElse": [ "////#else" ],
+					"actionableElseif": [ "////#elseif" ],
+					"actions": [ "cStyleUncomment", "cStyleReduceComment" ],
+					"trim": true,
+					"wholeLine": true,
+					"evaluator": "C++"
+				}
+          
+        }
+      ]
+    }
+  }
+}
